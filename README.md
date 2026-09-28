@@ -1,33 +1,68 @@
-# Zone Comics — application Flutter Android
+# Zone Comics
 
-## Démarrer dans Android Studio (Windows)
+**Zone Comics** est une application Android permettant de gérer une bibliothèque personnelle de comics Marvel et DC : suivi de lecture, notes, recherche de numéros et calendrier des prochaines sorties.
 
-1. Installe Flutter et Android Studio (plugins Flutter et Dart), puis vérifie `flutter doctor` dans PowerShell.
-2. Décompresse le ZIP. Depuis PowerShell, dans le dossier `ZoneComics`, lance `powershell -ExecutionPolicy Bypass -File .\setup_android.ps1`. Cette commande crée le module Android standard avec le SDK Flutter présent sur ton PC.
-3. Dans Android Studio, **File > Open**, sélectionne le dossier **ZoneComics** (racine du projet). Branche ton téléphone avec le débogage USB activé et lance `lib/main.dart` avec ▶. `flutter run` fonctionne aussi.
-4. Pour générer un APK installable, lance `powershell -ExecutionPolicy Bypass -File .\build_apk.ps1`. Copie `build\app\outputs\flutter-apk\app-debug.apk` sur ton téléphone. Cet APK debug est signé automatiquement par Flutter pour l'essai personnel ; pour diffuser une version release, configure ta propre signature Android.
+## Télécharger l'application
 
-Le projet cible Android 6.0 (API 23) minimum pour protéger les identifiants Metron.
+[![Télécharger Zone Comics pour Android](https://img.shields.io/badge/T%C3%A9l%C3%A9charger-l%27APK-1976D2?style=for-the-badge&logo=android&logoColor=white)](https://github.com/walid379/ZoneComics/releases/latest)
 
-Le dossier `android/` est généré sur ton PC par `flutter create`, pour garder une plateforme Android compatible avec ta version locale de Flutter/Gradle. Les fichiers de l'application sont sous `lib/` et restent modifiables dans Android Studio. La bibliothèque et le cache des sorties sont enregistrés dans une base SQLite privée sur le téléphone. Les anciennes données JSON sont migrées automatiquement au premier démarrage. La suppression de l'application efface les données locales.
+La dernière version est disponible sur la page **Releases** :
+
+1. Ouvre [la dernière version de Zone Comics](https://github.com/walid379/ZoneComics/releases/latest).
+2. Descends jusqu'à la section **Assets**.
+3. Télécharge le fichier se terminant par `.apk`.
+4. Ouvre le fichier téléchargé sur ton téléphone.
+5. Si Android le demande, autorise temporairement l'installation depuis cette source.
+6. Appuie sur **Installer**.
+
+> Zone Comics nécessite Android 6.0 ou une version plus récente.
+
+## Mettre l'application à jour
+
+Télécharge la nouvelle APK depuis la même page, puis installe-la directement par-dessus la version déjà présente.
+
+**Ne désinstalle pas l'ancienne version** avant la mise à jour : la bibliothèque est stockée localement sur le téléphone. La mise à jour doit également être signée avec la même clé Android pour conserver les données.
 
 ## Fonctionnalités
 
-- Bibliothèque SQLite : ajout, modification, suppression, recherche et filtres par éditeur ou statut.
-- Ajout unifié : recherche Metron et création manuelle depuis le même écran ; si aucun résultat n'existe, le formulaire manuel est prérempli.
-- Lecture : la note sur 5 est proposée uniquement lorsque le statut est **Lu**.
-- Sorties : calendrier mensuel Marvel/DC, sélection par journée, cache SQLite et actualisation manuelle.
-- Mode invité : aucun compte Metron n'est nécessaire pour gérer la bibliothèque. La connexion Metron reste facultative pour la recherche distante et l'actualisation des sorties.
-- Réglages : les identifiants Metron sont enregistrés dans le stockage sécurisé du téléphone, jamais dans SQLite.
-- Identité Android : nom affiché **Zone Comics** et logo personnalisé généré depuis `assets/icon/app_icon.png`.
+- Bibliothèque personnelle Marvel et DC.
+- Ajout, modification et suppression de comics.
+- Recherche Metron ou création manuelle lorsqu'un numéro est absent.
+- Statuts de lecture et notation sur 5 pour les comics lus.
+- Recherche et filtres par éditeur ou statut.
+- Calendrier mensuel des prochaines sorties.
+- Fonctionnement hors ligne pour toute la bibliothèque.
+- Compte Metron facultatif pour enrichir la recherche et actualiser les sorties.
+- Stockage local SQLite et identifiants Metron protégés.
 
-Pour réappliquer le nom et le logo sur un projet Android déjà initialisé, lance `powershell -ExecutionPolicy Bypass -File .\apply_branding.ps1` à la racine du projet.
+## Données et confidentialité
 
-Metron est une base communautaire : les annonces peuvent être incomplètes ou changer. Les sorties interrogent au maximum deux pages par éditeur et par rafraîchissement ; l'écran peut donc omettre des titres si le volume de résultats est élevé. Les couvertures et images ne sont pas nécessaires à l'utilisation.
+La bibliothèque reste enregistrée dans l'espace privé de l'application sur le téléphone. Zone Comics n'envoie pas la collection vers un serveur. La désinstallation ou l'effacement des données Android supprime la bibliothèque locale.
 
-## Structure
+## Développement
 
-- `lib/comic.dart` : modèles et états de lecture.
-- `lib/repository.dart` : sauvegarde locale et identifiants sécurisés.
-- `lib/metron_api.dart` : requêtes Metron.
-- `lib/main.dart` : interface Flutter.
+Le projet utilise Flutter. Après avoir installé Flutter et Android Studio :
+
+```powershell
+flutter clean
+flutter pub get
+flutter analyze
+flutter test
+flutter run
+```
+
+Pour générer l'APK release :
+
+```powershell
+flutter build apk --release
+```
+
+Le fichier généré se trouve dans :
+
+```text
+build\app\outputs\flutter-apk\app-release.apk
+```
+
+## BaxterVerse
+
+Zone Comics est lié à l'univers [BaxterVerse](https://comicsverse.tail46e980.ts.net/).
