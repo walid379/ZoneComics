@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(padding: const EdgeInsets.fromLTRB(20, 16, 20, 100), children: [
       _hero('Ta collection', '${comics.length} comics répertoriés', Icons.menu_book_rounded),
       const SizedBox(height: 22),
-      Row(children: [const Expanded(child: Text('Ma bibliothèque', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: ink))), TextButton.icon(onPressed: _openAddComic, icon: const Icon(Icons.add_circle_outline, size: 19), label: const Text('Ajouter'))]),
+      Row(children: [const Expanded(child: Text('Ma bibliothèque', style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: ink)))]),
       const SizedBox(height: 10),
       TextField(controller: searchController, decoration: InputDecoration(hintText: 'Chercher un titre, numéro, année', prefixIcon: const Icon(Icons.search), filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(15), borderSide: BorderSide.none))),
       const SizedBox(height: 12),
